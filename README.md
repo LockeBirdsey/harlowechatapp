@@ -1,6 +1,8 @@
 # Harlowe Chat App
 A semi-interactive chat app for use in the Harlowe 3+ storyformat for Twine
 
+![The Harlowe Chat App](example.gif)
+
 ## How to use:
 
 `ChatDisplay.twee` contains the 2 passages that generate the chat flow, namely, ChatCycler and ChatResponse.
@@ -29,6 +31,9 @@ Variables this uses automatically:
 - $rand: For generating how many $dots should be cycled through
 - $message: The next message to be displayed
 
+## Help?
+
+Can be contacted on Twitter @ lockebirdsey
 
 ## Future improvements:
 - Player choice in dialogue instead of just clicking to move the flow
