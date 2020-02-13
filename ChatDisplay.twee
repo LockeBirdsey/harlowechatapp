@@ -1,0 +1,311 @@
+:: StoryTitle
+ChatDisplay
+
+
+:: StoryData
+{
+	"ifid": "3FC9250F-359E-4ED4-B77E-29EAA79D0E62",
+	"format": "Harlowe",
+	"format-version": "3.1.0",
+	"start": "Untitled Passage",
+	"zoom": 0.6
+}
+
+
+:: Untitled Passage {"position":"1355,105.83333333333337","size":"100,100"}
+A hacky chat app built for Harlowe 3.1
+
+[[Chat example 1->Chat1]]  
+
+[[Chat example 2->Chat2]] 
+
+The chat box design comes straight from https://css-tricks.com/replicating-google-hangouts-chat/ but it doesn't quite work as a copy-paste job.
+
+:: Chat1 {"position":"1214,248.33333333333334","size":"100,100"}
+{
+<!--Set a message waiting in the chat app for you to reply to-->
+  (set: $othersPendingMessage to "Hey, did you want to get dinner tomorrow?	")
+	<!--Put the script in an array. Can use an empty string ("") to skip an entry)-->
+  (set: $chatScriptArray to (a:
+	"Sure.",
+	"Is The Goose and Gander alright?",
+	"Yeah. See you tomorrow.",
+	"",
+	"How are you?",
+	"I'm alright, yourself?",
+	"I truly hate working with CSS.",
+	"...",
+	"",
+	"Tell me about it."
+	)
+  ) 
+  (set: $pendingMessage to $othersPendingMessage)
+  (display: "ChatCycler")
+}
+
+:: Chat2 {"position":"1498.3333333333335,247.50000000000003","size":"100,100"}
+{
+<!--We're starting this chat, not the other-->
+  (set: $othersPendingMessage to "")
+	<!--Put the script in an array. Can use an empty string ("") to skip an entry)-->
+  (set: $chatScriptArray to (a:
+	"Guess who has control now?!",
+	"Oh I guess it's you.",
+	"*EVIL LAUGHTER*",
+	"smh",
+	"",
+	"Goodbye"
+	)
+  ) 
+  (set: $pendingMessage to $othersPendingMessage)
+  (display: "ChatCycler")
+}
+
+
+:: ChatResponse {"position":"915.6666666666666,113.33333333333327","size":"100,100"}
+{
+	<!--Sets a random number of characters to cycle through based on the $message's length to eschew roboticness-->
+	(set: $count to 0, $rand to (random:(floor:$message's length * 0.2), (floor:$message's length * 1.2)))
+	(replace: ?repeatingDots)[]
+	<!--Set the speed of the repeating characters here-->
+	(live: 0.2s)[
+	    (set: _i to ($count % $dots's length) + 1)
+	    (set: $dotPrint to $dots's (_i))
+	    (replace: ?repeatingDots)[$dotPrint]	 
+	    (set: $count to it + 1)
+	    (if: $count > $rand)[
+		<!--When the cycle is finished, append the response to the |chat> hook with the required HTML-->
+	    	(stop:)(append: ?chat)[
+	    		(replace: ?repeatingDots)[]
+	    		<li class="other">
+					<div class="avatar">
+					        $otherAvatar
+					</div>
+					<div class="messages">
+						<p>$message(set: $finished to true)</p>
+					</div>
+				</li>		    	
+		    ]
+	  	]
+	]
+}
+
+
+:: ChatCycler {"position":"915,239.16666666666669","size":"100,100"}
+{
+<!--This is very hacky but works (aside from some CSS issues)-->
+<!--Set up the chat, display the pending message if one exists, and then cycle through the chat script array and append to the |chat> hook-->
+(set: $finished to true)
+(set: $iter to 1)
+<!--The chat app-->
+<section class="module">
+<header class="top-bar">
+<h1>$chatAppTitle</h1>
+</header>
+<!--The main chat cycle-->
+<ol class="discussion">
+|chat>[] <!--everything happens in this hook-->
+(if: $pendingMessage is not 0 and $pendingMessage is not "")[
+  (append: ?chat)[
+	  <li class="other">
+	  <div class="avatar">
+			  $otherAvatar
+	  </div>
+	  <div class="messages">
+		  <p>$pendingMessage</p>
+	  </div>
+	  </li>
+  ]
+]
+<div class="messageTyping">
+|repeatingDots>[]
+</div>
+</ol>
+</section>
+	(live: 2s)[
+		(if: $finished is true)[
+			(set: $finished to false)
+			(if: $iter % 2 is 0)[
+				(set: $message to $chatScriptArray's ($iter))
+				(if: $message is "")[
+					(set: $finished to true)
+					(set: $iter to it + 1)
+				](else:)[
+					(display: "ChatResponse")
+					(set: $iter to it + 1)
+				]
+			](else:)[
+				(set: $message to $chatScriptArray's ($iter))
+				(if: $message is "")[
+					(set: $finished to true)
+					(set: $iter to it + 1)
+				](else:)[
+					(append: ?chat)[
+						<li class="self">
+							<div class="avatar">
+									$playerAvatar
+							</div>
+							<div class="messages">
+								<p>(link-replace: $message)[$message(set: $finished to true)(set: $iter to it + 1)]</p>
+							</div>
+						</li>
+					]
+				]
+			]
+		]
+		(if: $iter > $chatScriptArray's length)[(stop:)]
+	]
+}
+
+:: Startup [startup] {"position":"775,195.83333333333337","size":"100,100"}
+<!--Set the title of the chat application-->
+(set: $chatAppTitle to "The Chat App")
+<!--Characters to cycle through to show the other entity typing-->
+(set: $dots to (a: '.', '..','...'))
+<!--Paths to player and other chatter avatars. Is required to be full HTML img src strings.-->
+(set: $playerAvatar to "<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAwUExURf8ANwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABPNngYAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAcSURBVFjD7cEBDQAAAMKg909tDwcEAAAAAByoARPsAAFwJuooAAAAAElFTkSuQmCC\"/>")
+(set: $otherAvatar to "<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cEBDQAAAMKg909tDjcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbNXWUAAEE/b5iAAAAAElFTkSuQmCC\"/>")
+
+:: Story Stylesheet [stylesheet]
+.module {
+    display:block;
+	width: 300px;
+	margin: 20px auto;
+	font-size: 1.0rem;
+  	height: 500px;
+	background: #FFF
+}
+
+.top-bar {
+	text-align: center;
+	background: #666;
+	color: white;
+	padding: 0.5rem;
+	position: relative;
+	overflow: hidden;
+}
+.top-bar h1 {
+	display: inline;
+	font-size: 2.1rem;
+}
+
+.top-bar .left {
+	float: left;	
+}
+.top-bar .right {
+  float: right;
+  padding-top: 5px;
+}
+.top-bar > * {
+  position: relative;
+}
+.top-bar::before {
+	content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  bottom: -100%;
+  opacity: 0.25;
+  background: radial-gradient(#ffffff, #000000);
+  animation: pulse 3s ease alternate infinite;
+}
+
+.discussion {
+  overflow:auto;
+	color: #000;
+	list-style: none;
+	background: #ffff;
+	margin: 0;
+	padding: 0 0 5px 0;
+	max-height: 450px;
+}
+.messageTyping {
+	color: #000;
+  	position: relative;
+  	font-size: 1.0rem;
+  	font-weight: bold;
+   background: #f7e9e9;
+  	width: 2.0rem;
+}
+.discussion li {
+  padding: 0.5rem;
+  overflow: hidden;
+  display: flex;
+}
+.discussion .avatar {
+  width: 40px;
+  position: relative;
+}
+.discussion .avatar img {
+  display: block;
+  width: 100%;
+}
+
+.other .avatar:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border: 5px solid white;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+.other .messages {
+ background: #f7e9e9; 
+}
+.self {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.self .messages {
+  order: 1;
+  border-bottom-right-radius: 0;
+  background: #9ef7b6;
+}
+.self .avatar {
+  order: 2;
+}
+.self .avatar:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: 5px solid white;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.messages {
+	color: #000;
+	background: #FFF;
+	padding: 1px;
+	border-radius: 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+ 
+}
+.messages p {
+	color: #000;
+  	font-size: 0.8rem;
+	margin: 0 0 0.1rem 0;
+}
+.messages time {
+	color:black;
+	font-size: 0.7rem;
+	color: #000;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
