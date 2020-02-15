@@ -97,7 +97,12 @@
     border-bottom-color: transparent;
 }
 
-.other .messages {
+.other {
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.other .messages {	
     background: #f7e9e9;
 }
 
@@ -119,7 +124,7 @@
 .self .avatar:after {
     content: "";
     position: absolute;
-    bottom: 25%;
+    bottom: 24%;
     left: 0;
     width: 0;
     height: 0;
@@ -135,6 +140,7 @@
     font-size: 1.0rem;
     font-weight: bold;
     background: #f7e9e9;
+    border-radius: 5px;
     width: 2.0rem;
 }
 
@@ -243,7 +249,8 @@ The code for this is available at &lt;a href=&quot;https://github.com/LockeBirds
 &lt;h1&gt;$chatAppTitle&lt;/h1&gt;
 &lt;/header&gt;
 &lt;!--The main chat cycle--&gt;
-&lt;ol class=&quot;discussion&quot;&gt;
+&lt;ol class=&quot;discussion&quot; id=&quot;discussion&quot;&gt;
+&lt;script&gt;var chatDiscussion = document.getElementById(&quot;discussion&quot;);&lt;/script&gt;
 |chat&gt;[] &lt;!--everything happens in this hook--&gt;
 (if: $pendingMessage is not 0 and $pendingMessage is not &quot;&quot;)[
   (append: ?chat)[
@@ -287,6 +294,7 @@ The code for this is available at &lt;a href=&quot;https://github.com/LockeBirds
 							&lt;/div&gt;
 							&lt;div class=&quot;messages&quot;&gt;
 								&lt;p&gt;(link-replace: $message)[$message(set: $finished to true)(set: $iter to it + 1)]&lt;/p&gt;
+								&lt;script&gt;chatDiscussion.scrollTop = chatDiscussion.scrollHeight;&lt;/script&gt;
 							&lt;/div&gt;
 						&lt;/li&gt;
 					]

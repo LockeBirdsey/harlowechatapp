@@ -105,7 +105,8 @@ The code for this is available at <a href="https://github.com/LockeBirdsey/harlo
 <h1>$chatAppTitle</h1>
 </header>
 <!--The main chat cycle-->
-<ol class="discussion">
+<ol class="discussion" id="discussion">
+<script>var chatDiscussion = document.getElementById("discussion");</script>
 |chat>[] <!--everything happens in this hook-->
 (if: $pendingMessage is not 0 and $pendingMessage is not "")[
   (append: ?chat)[
@@ -149,6 +150,7 @@ The code for this is available at <a href="https://github.com/LockeBirdsey/harlo
 							</div>
 							<div class="messages">
 								<p>(link-replace: $message)[$message(set: $finished to true)(set: $iter to it + 1)]</p>
+								<script>chatDiscussion.scrollTop = chatDiscussion.scrollHeight;</script>
 							</div>
 						</li>
 					]
@@ -255,7 +257,12 @@ The code for this is available at <a href="https://github.com/LockeBirdsey/harlo
     border-bottom-color: transparent;
 }
 
-.other .messages {
+.other {
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.other .messages {	
     background: #f7e9e9;
 }
 
@@ -277,7 +284,7 @@ The code for this is available at <a href="https://github.com/LockeBirdsey/harlo
 .self .avatar:after {
     content: "";
     position: absolute;
-    bottom: 25%;
+    bottom: 24%;
     left: 0;
     width: 0;
     height: 0;
@@ -293,6 +300,7 @@ The code for this is available at <a href="https://github.com/LockeBirdsey/harlo
     font-size: 1.0rem;
     font-weight: bold;
     background: #f7e9e9;
+    border-radius: 5px;
     width: 2.0rem;
 }
 
