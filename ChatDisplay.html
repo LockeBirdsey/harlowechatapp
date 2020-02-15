@@ -11,147 +11,169 @@
 
 <tw-story></tw-story>
 
-<tw-storydata name="ChatDisplay" startnode="5" creator="Twine" creator-version="2.3.5" ifid="3FC9250F-359E-4ED4-B77E-29EAA79D0E62" zoom="0.6" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.module {
-    display:block;
-	width: 300px;
-	margin: 20px auto;
-	font-size: 1.0rem;
-  	height: 500px;
-	background: #FFF
+<!-- UUID://3FC9250F-359E-4ED4-B77E-29EAA79D0E62// --><tw-storydata name="ChatDisplay" startnode="1" creator="Tweego" creator-version="2.1.0+9ea2fab" ifid="3FC9250F-359E-4ED4-B77E-29EAA79D0E62" zoom="0.6" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.module {
+    display: inline-block;
+    height: 500px;
+    width: 300px;
+    font-size: 1.0rem;
+    margin: 20px auto; 
+    background: #FFF
 }
 
 .top-bar {
-	text-align: center;
-	background: #666;
-	color: white;
-	padding: 0.5rem;
-	position: relative;
-	overflow: hidden;
+    text-align: center;
+    background: #666;
+    color: white;
+    padding: 0.5rem;
+    position: relative;
+    overflow: hidden;
 }
+
 .top-bar h1 {
-	display: inline;
-	font-size: 2.1rem;
+    display: inline;
+    font-size: 2.1rem;
 }
 
 .top-bar .left {
-	float: left;	
+    float: left;
 }
+
 .top-bar .right {
-  float: right;
-  padding-top: 5px;
+    float: right;
+    padding-top: 5px;
 }
-.top-bar > * {
-  position: relative;
+
+.top-bar>* {
+    position: relative;
 }
+
 .top-bar::before {
-	content: "";
-  position: absolute;
-  top: -100%;
-  left: 0;
-  right: 0;
-  bottom: -100%;
-  opacity: 0.25;
-  background: radial-gradient(#ffffff, #000000);
-  animation: pulse 3s ease alternate infinite;
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    bottom: -100%;
+    opacity: 0.25;
+    background: radial-gradient(#ffffff, #000000);
+    animation: pulse 3s ease alternate infinite;
 }
 
 .discussion {
-  overflow:auto;
-	color: #000;
-	list-style: none;
-	background: #ffff;
-	margin: 0;
-	padding: 0 0 5px 0;
-	max-height: 450px;
+    overflow: auto;
+    color: #000;
+    list-style: none;
+    background: #ffff;
+    margin: 0;
+    padding: 0 0 5px 0;
+    max-height: 450px;
 }
-.messageTyping {
-	color: #000;
-  	position: relative;
-  	font-size: 1.0rem;
-  	font-weight: bold;
-   background: #f7e9e9;
-  	width: 2.0rem;
-}
+
 .discussion li {
-  padding: 0.5rem;
-  overflow: hidden;
-  display: flex;
+    padding: 0.5rem;
+    overflow: hidden;
+    display: flex;
 }
+
 .discussion .avatar {
-  width: 40px;
-  position: relative;
+    width: 40px;
+    position: relative;
 }
+
 .discussion .avatar img {
-  display: block;
-  width: 100%;
+	position: relative;
+    width: 100%;
 }
 
 .other .avatar:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-  border: 5px solid white;
-  border-left-color: transparent;
-  border-bottom-color: transparent;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border: 5px solid white;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
 }
+
 .other .messages {
- background: #f7e9e9; 
+    background: #f7e9e9;
 }
+
 .self {
-  justify-content: flex-end;
-  align-items: flex-end;
+    justify-content: flex-end;
+    align-items: flex-start;
 }
+
 .self .messages {
-  order: 1;
-  border-bottom-right-radius: 0;
-  background: #9ef7b6;
+    order: 1;
+    border-bottom-right-radius: 0;
+    background: #9ef7b6;
 }
+
 .self .avatar {
-  order: 2;
+    order: 2;
 }
+
 .self .avatar:after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border: 5px solid white;
-  border-right-color: transparent;
-  border-top-color: transparent;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    content: "";
+    position: absolute;
+    bottom: 25%;
+    left: 0;
+    width: 0;
+    height: 0;
+    border: 5px solid white;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.messageTyping {
+    color: #000;
+    position: relative;
+    font-size: 1.0rem;
+    font-weight: bold;
+    background: #f7e9e9;
+    width: 2.0rem;
 }
 
 .messages {
-	color: #000;
-	background: #FFF;
-	padding: 1px;
-	border-radius: 5px;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
- 
+    color: #000;
+    background: #FFF;
+    padding: 1px;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
+
 .messages p {
-	color: #000;
-  	font-size: 0.8rem;
-	margin: 0 0 0.1rem 0;
+    color: #000;
+    font-size: 0.8rem;
+    margin: 0 0 0.1rem 0;
 }
+
 .messages time {
-	color:black;
-	font-size: 0.7rem;
-	color: #000;
+    color: black;
+    font-size: 0.7rem;
+    color: #000;
 }
 
 @keyframes pulse {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 0.5;
-  }
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Chat1" tags="" position="1214,248.33333333333334" size="100,100">{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.5;
+    }
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start" tags="" position="1355,105.83333333333337" size="100,100">A hacky chat app built for Harlowe 3.1
+
+[[Chat example 1-&gt;Chat1]]  
+
+[[Chat example 2-&gt;Chat2]] 
+
+The chat box design comes straight from &lt;a href=&quot;https://css-tricks.com/replicating-google-hangouts-chat/&quot;&gt;https://css-tricks.com/replicating-google-hangouts-chat/&lt;/a&gt; but it doesn&#39;t quite work as a copy-paste job, so some nice features have been added like scrolling.
+
+The code for this is available at &lt;a href=&quot;https://github.com/LockeBirdsey/harlowechatapp&quot;&gt; https://github.com/LockeBirdsey/harlowechatapp&lt;/a&gt;</tw-passagedata><tw-passagedata pid="2" name="Chat1" tags="" position="1214,248.33333333333334" size="100,100">{
 &lt;!--Set a message waiting in the chat app for you to reply to--&gt;
   (set: $othersPendingMessage to &quot;Hey, did you want to get dinner tomorrow?	&quot;)
 	&lt;!--Put the script in an array. Can use an empty string (&quot;&quot;) to skip an entry)--&gt;
@@ -170,7 +192,22 @@
   ) 
   (set: $pendingMessage to $othersPendingMessage)
   (display: &quot;ChatCycler&quot;)
-}</tw-passagedata><tw-passagedata pid="2" name="ChatResponse" tags="" position="915.6666666666666,113.33333333333327" size="100,100">{
+}</tw-passagedata><tw-passagedata pid="3" name="Chat2" tags="" position="1498.3333333333335,247.50000000000003" size="100,100">{
+&lt;!--We&#39;re starting this chat, not the other--&gt;
+  (set: $othersPendingMessage to &quot;&quot;)
+	&lt;!--Put the script in an array. Can use an empty string (&quot;&quot;) to skip an entry)--&gt;
+  (set: $chatScriptArray to (a:
+	&quot;Guess who has control now?!&quot;,
+	&quot;Oh I guess it&#39;s you.&quot;,
+	&quot;*EVIL LAUGHTER*&quot;,
+	&quot;smh&quot;,
+	&quot;&quot;,
+	&quot;Goodbye&quot;
+	)
+  ) 
+  (set: $pendingMessage to $othersPendingMessage)
+  (display: &quot;ChatCycler&quot;)
+}</tw-passagedata><tw-passagedata pid="4" name="ChatResponse" tags="" position="915.6666666666666,113.33333333333327" size="100,100">{
 	&lt;!--Sets a random number of characters to cycle through based on the $message&#39;s length to eschew roboticness--&gt;
 	(set: $count to 0, $rand to (random:(floor:$message&#39;s length * 0.2), (floor:$message&#39;s length * 1.2)))
 	(replace: ?repeatingDots)[]
@@ -195,7 +232,7 @@
 		    ]
 	  	]
 	]
-}</tw-passagedata><tw-passagedata pid="3" name="ChatCycler" tags="" position="915,239.16666666666669" size="100,100">{
+}</tw-passagedata><tw-passagedata pid="5" name="ChatCycler" tags="" position="915,239.16666666666669" size="100,100">{
 &lt;!--This is very hacky but works (aside from some CSS issues)--&gt;
 &lt;!--Set up the chat, display the pending message if one exists, and then cycle through the chat script array and append to the |chat&gt; hook--&gt;
 (set: $finished to true)
@@ -258,34 +295,13 @@
 		]
 		(if: $iter &gt; $chatScriptArray&#39;s length)[(stop:)]
 	]
-}</tw-passagedata><tw-passagedata pid="4" name="Startup" tags="startup" position="775,195.83333333333337" size="100,100">&lt;!--Set the title of the chat application--&gt;
+}</tw-passagedata><tw-passagedata pid="6" name="Startup" tags="startup" position="775,195.83333333333337" size="100,100">&lt;!--Set the title of the chat application--&gt;
 (set: $chatAppTitle to &quot;The Chat App&quot;)
 &lt;!--Characters to cycle through to show the other entity typing--&gt;
 (set: $dots to (a: &#39;.&#39;, &#39;..&#39;,&#39;...&#39;))
 &lt;!--Paths to player and other chatter avatars. Is required to be full HTML img src strings.--&gt;
 (set: $playerAvatar to &quot;&lt;img src=\&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAwUExURf8ANwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABPNngYAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAcSURBVFjD7cEBDQAAAMKg909tDwcEAAAAAByoARPsAAFwJuooAAAAAElFTkSuQmCC\&quot;/&gt;&quot;)
-(set: $otherAvatar to &quot;&lt;img src=\&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cEBDQAAAMKg909tDjcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbNXWUAAEE/b5iAAAAAElFTkSuQmCC\&quot;/&gt;&quot;)</tw-passagedata><tw-passagedata pid="5" name="Untitled Passage" tags="" position="1355,105.83333333333337" size="100,100">A hacky chat app built for Harlowe 3.1
-
-[[Chat example 1-&gt;Chat1]]  
-
-[[Chat example 2-&gt;Chat2]] 
-
-The chat box design comes straight from https://css-tricks.com/replicating-google-hangouts-chat/ but it doesn&#39;t quite work as a copy-paste job. </tw-passagedata><tw-passagedata pid="6" name="Chat2" tags="" position="1498.3333333333335,247.50000000000003" size="100,100">{
-&lt;!--We&#39;re starting this chat, not the other--&gt;
-  (set: $othersPendingMessage to &quot;&quot;)
-	&lt;!--Put the script in an array. Can use an empty string (&quot;&quot;) to skip an entry)--&gt;
-  (set: $chatScriptArray to (a:
-	&quot;Guess who has control now?!&quot;,
-	&quot;Oh I guess it&#39;s you.&quot;,
-	&quot;*EVIL LAUGHTER*&quot;,
-	&quot;smh&quot;,
-	&quot;&quot;,
-	&quot;Goodbye&quot;
-	)
-  ) 
-  (set: $pendingMessage to $othersPendingMessage)
-  (display: &quot;ChatCycler&quot;)
-}</tw-passagedata></tw-storydata>
+(set: $otherAvatar to &quot;&lt;img src=\&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cEBDQAAAMKg909tDjcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbNXWUAAEE/b5iAAAAAElFTkSuQmCC\&quot;/&gt;&quot;)</tw-passagedata></tw-storydata>
 
 <script title="Twine engine code" data-main="harlowe">"use strict";function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var _slicedToArray=function(){function e(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var a,s=e[Symbol.iterator]();!(r=(a=s.next()).done)&&(n.push(a.value),!t||n.length!==t);r=!0);}catch(e){i=!0,o=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw o}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};!function(){/**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
